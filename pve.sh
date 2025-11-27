@@ -662,8 +662,8 @@ cat > $tmpf << 'EOF'
         $res->{thermalstate} = `sensors`;
         $res->{cpusensors} = `cat /proc/cpuinfo | grep MHz && lscpu | grep MHz`;
 
-        $res->{hdd_temperatures} = `smartctl -a /dev/sd?|grep -E "Device Model|Capacity|Power_On_Hours|Temperature"`;
-
+        $res->{hdd_temperatures} = `for disk in /dev/sd[a-z]; do smartctl -a \$disk; done | grep -E "Device Model|Capacity|Power_On_Hours|Temperature"`;
+		
         my $powermode = `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor && turbostat -S -q -s PkgWatt -i 0.1 -n 1 -c package | grep -v PkgWatt`;
         $res->{cpupower} = $powermode;
 
