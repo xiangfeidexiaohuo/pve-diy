@@ -2,16 +2,13 @@
 
 ![png](./pic/55.png)
 
-- 原始脚本来自 [shidahuilang/pve](https://github.com/shidahuilang/pve/blob/main/pve.sh)
+- 原始脚本来自 [shidahuilang/pve](https://github.com/shidahuilang/pve/blob/main/pve.sh)，优化部分代码，支持 PVE9！
 
-- 优化部分代码，支持 PVE9！
-```
-动态识别 NVME 磁盘，支持 AMD CPU 温度（包括核显）；
-CPU 频率支持超多核心（4 核心显示一行，16 核就显示四行）；
-CPU 温度支持超多核心（4 核心显示一行，16 核就显示四行）；
-可移除旧内核(危险操作，谨慎！！！)；
-其他修复和精简代码。
-```
+- **动态识别 NVMe 磁盘**，新增 AMD CPU 温度监控支持（包括核显温度）。
+- **CPU 频率显示优化**，支持超多核心，按每 4 个核心一行展示，16 核心自动分为 4 行。
+- **CPU 温度显示优化**，同样支持超多核心，按每 4 个核心一行展示，布局更加清晰。
+- **新增旧内核卸载功能**，可移除不再使用的旧内核（危险操作，请谨慎使用；基础内核不支持卸载）。
+- **其他优化**：修复已知问题，精简代码，提升整体稳定性与运行体验。
 
 - **修改 PVE 存在风险，请自行备份重要数据；出现任何风险，自行承担！**
 
@@ -27,48 +24,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xiangfeidexiaohuo/pve-di
 
 ![png](./pic/56.png)
 
-
-- **高度变量：**
-
-某些CPU核心过多，或者想显示那个PVE存储库那一行，导致高度不够，脚本下载到本地，修改69为合适的数字，如80、100等。
-
 ![png](./pic/57.png)
 
+![png](./pic/58.png)
 
-***
-
-- **PVE8 升 PVE9：**
-
-<details>
-<summary>点击展开，查看详细教程！</summary>
-
-- 1、已换源的情况下，运行以下两行命令：（若未换源，运行上面的一键脚本先换源。）
-```
-apt update
-apt dist-upgrade
-```
-- 2、运行升级检查命令：（Error 错误多，就放弃，直接镜像重装。）
-```
-pve8to9
-```
-- 3、修改为 PVE9 的源：
-```
-sed -i 's/bookworm/trixie/g' /etc/apt/sources.list
-sed -i 's/bookworm/trixie/g' /etc/apt/sources.list.d/*.list
-```
-- 4、开始更新 PVE9：（升级过程中，若出现弹窗，不懂就一律默认回车。）
-```
-apt update
-apt dist-upgrade
-```
-- 5、升级完成，重启：（重启完成后，运行上面的一键脚本，修改温度等。）
-```
-reboot
-```
-
-</details>
-
-***
 ***
 
 ## Proxmox VE 7.x 相关教程（7.x 旧版手动修改，有参考价值，弃用！）
